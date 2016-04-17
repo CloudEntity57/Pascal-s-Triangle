@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset = "utf-8">
+    <title>Pascal's Triangle Generator</title>
+                <style>
+                    body{
+                        overflow:scroll;
+                        background-color:blanchedalmond;
+                    }
+                    #output{
+
+                        background-color:grey;
+                        padding:1em 2em 1em;
+                        border-radius:5px;
+                        font-family:Verdana,Arial,sans-serif;
+                        font-size:.55em;
+                        text-align:center;
+                        color:blanchedalmond;
+
+                    }
+
+                    #output p:nth-child(even){
+                        color:orange;
+                    }
+
+                    #holder,#buttonHolder{
+                        display:flex;
+                        justify-content: center;
+                        margin:1em 0em 1em;
+                    }
+                </style>
+</head>
+    
+<body>
+    <div id="buttonHolder">
+    <button type="reset">Reload</button>
+    </div>
+    <div id="holder">
+    <div id="output">
+        <h2>Pascal's Triangle</h2>   
+    </div>
+    </div>
+    
+</body>
+    <script src="jquery-1.11.3.js" type = "text/javascript" charset="utf-8"></script>
+    <script>
+        //Pascal's Triangle by Josh Foster
+
+function print(message){
+    var outputDiv = document.getElementById("output");
+    outputDiv.innerHTML += ('<p>'+message+'</p>');
+}
+        
+$("#buttonHolder button").click(function(){
+                        document.location.reload();
+                    })
+   
+function pascalsTriangle(){
+                var number = 1;
+                var nextLine = [1,1];
+                var lineTwo = nextLine.join(' ');
+                var sum = 0;
+                var pascLine = [];
+                pascLine = nextLine.slice();
+                
+                var amount = (prompt("How many lines of Pascal's Triangle would you like?"))-2;
+                var amount2 = parseInt(amount);
+    
+                    print(number);
+                    print(lineTwo);
+    
+                    for (x=0; x < amount2; x+=1){ 
+                        
+                        for(y=0; y < nextLine.length-1; y+=1){
+                            
+                            //create empty array big enough to fill with sums
+                            pascLine = [1];
+                                    for(z=1; z<=nextLine.length-1;z+=1){
+                                    pascLine.push(0);
+                                    }
+                            pascLine.push(1);
+                             //iterate through existing line and fill new empty array with sums
+                                    for(a=0; a<nextLine.length-1; a+=1){
+                                        sum = nextLine[a]+nextLine[a+1];
+                                        pascLine.splice(a+1, 1, sum);
+                                    }
+                        }
+                
+                nextLine = pascLine.slice();
+                var finalLine = pascLine.join(' ');
+                print(finalLine);
+                
+                $("#output,#buttonHolder").hide();
+                $("#output,#buttonHolder").show(550);
+                    
+                }
+                }
+                
+                pascalsTriangle();        
+    </script>
+</html>
